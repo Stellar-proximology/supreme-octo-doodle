@@ -1,3 +1,68 @@
 type Prompt = { id:string; name:string; body:string; createdAt:number; updatedAt:number; version:number };
 type Log = { id:string; ts:number; input:string; output:string; node:"body"|"heart"|"mind"; model:string; tokens:number; ms:number };
 type TrinityConfig = { body:{gate:number;line:number}, heart:{gate:number;line:number}, mind:{gate:number;line:number} };
+Smoke Tests
+
+./tests/smoke.sh
+
+Run Sheet (10 steps)
+
+1. Clone repo
+
+
+2. Copy .env.example → .env
+
+
+3. npm install
+
+
+4. npm run dev (desktop) or Termux script
+
+
+5. Open app
+
+
+6. Install as PWA
+
+
+7. Create & reload prompts → persistence OK
+
+
+8. Test avatar speaks; mic captures
+
+
+9. ./tests/smoke.sh → API OK
+
+
+10. Toggle Wi-Fi → offline still serves app
+
+
+
+Risks & Mitigations
+
+Mic/ASR support varies → webkitSpeechRecognition fallback + clear UI.
+
+Ollama down → auto fall back to cloud; if no key → mock echo.
+
+Service worker cache drift → versioned CACHE_NAME and cleanup.
+
+SQLite busy → WAL mode, short busy timeout.
+
+
+
+---
+
+---
+
+### `cynthia-prime/.env.example`
+```ini
+PORT=8787
+CORS_ORIGIN=http://localhost:5173
+OLLAMA_BASE_URL=http://127.0.0.1:11434
+OLLAMA_MODEL=llama3.1:8b-instruct
+CLOUD_PROVIDER=openai
+OPENAI_API_KEY=
+OPENAI_MODEL=gpt-4o-mini
+
+
+---
