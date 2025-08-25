@@ -1,0 +1,8 @@
+pkg update -y && pkg upgrade -y
+pkg install -y nodejs-lts git sqlite
+
+git clone https://github.com/you/cynthia-prime.git
+cd cynthia-prime
+cp .env.example .env
+chmod +x server/scripts/termux-start.sh
+./server/scripts/termux-start.sh
